@@ -40,12 +40,15 @@ public class AddCommand(ExpenseService expenseService)
             string description = parseResult.GetValue(_descriptionOption)!;
             decimal amount = parseResult.GetValue(_amountOption);
             string category = parseResult.GetValue(_categoryOption)!;
+            if (amount > 0)
+            {
+                Expense expense = _expenseService.CreateExpense(description, category, amount);
 
-            Expense expense = _expenseService.CreateExpense(description, category, amount);
+                Console.WriteLine($"Expense added successfully ID: {expense.Id}");
 
-            Console.WriteLine($"Expense added successfully ID: {expense.Id}");
-
-            return 0;
+                return;
+            }
+            Console.WriteLine("You can't use non positive amounts");
         });
 
         return addCommand;
