@@ -10,11 +10,13 @@ public class ExportCommand(StorageService storageService)
     private readonly Option<string> _outputOption = new("--output", "-o")
     {
         Required = true,
+        Description = "Where are you going to export the file"
     };
 
     private readonly Option<string> _nameOption = new("--name", "-n")
     {
-        DefaultValueFactory = _ => DateTime.Now.ToString()
+        DefaultValueFactory = _ => DateTime.Now.ToString(),
+        Description = "Defines the name of the file"
     };
 
     public Command GetExportCommand()
