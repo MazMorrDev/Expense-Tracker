@@ -27,9 +27,8 @@ public class ExpenseService(StorageService storageService)
     public int GetLastIdPlusOne()
     {
         List<Expense> expenses = GetAllExpenses();
-        // Knowed Bug: If a user deletes one intermedial expense
-        // then the IDs will be duplicated in the save operation
-        return expenses.Count + 1;
+        int result = expenses.Last().Id + 1;
+        return result;
     }
 
     public void Delete(List<Expense> expenses, int id)

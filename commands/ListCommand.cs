@@ -12,8 +12,10 @@ public class ListCommand(ExpenseService expenseService)
         listCommand.SetAction(parseResult =>
         {
             Console.WriteLine("📋 Transaction list:");
-
-            // Aquí irá la lógica para leer y mostrar los gastos guardados
+            foreach (var item in _expenseService.GetAllExpenses())
+            {
+                Console.WriteLine(item.Id + " | " + item.Description + " | " + item.Amount + " | " + item.Category);
+            }
             return 0;
         });
         return listCommand;
