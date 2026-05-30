@@ -10,7 +10,7 @@ var storageService = new StorageService();
 var expenseService = new ExpenseService(storageService);
 
 var generalFlags = new GeneralFlags();
-var addCommand = new AddCommand(generalFlags);
+var addCommand = new AddCommand(generalFlags, expenseService);
 var listCommand = new ListCommand(expenseService);
 var rootCommand = new RootCommand("Expense Tracker - Oh My Expenses (;D Reference)");
 rootCommand.Subcommands.Add(addCommand.GetAddCommand());   // Add the "add" command to the root
