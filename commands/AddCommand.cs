@@ -8,19 +8,19 @@ public class AddCommand(ExpenseService expenseService)
     private readonly ExpenseService _expenseService = expenseService;
 
     // Definir las opciones una sola vez (como campos)
-    private readonly Option<string> _descriptionOption = new("--description")
+    private readonly Option<string> _descriptionOption = new("--description", "-d")
     {
         Required = true,
         Description = "Expense description"
     };
 
-    private readonly Option<decimal> _amountOption = new("--amount")
+    private readonly Option<decimal> _amountOption = new("--amount", "-a")
     {
         Required = true,
         Description = "Expense amount"
     };
 
-    private readonly Option<string> _categoryOption = new("--category")
+    private readonly Option<string> _categoryOption = new("--category", "-c")
     {
         DefaultValueFactory = _ => "General",
         Description = "Expense category"
@@ -29,7 +29,7 @@ public class AddCommand(ExpenseService expenseService)
     public Command GetAddCommand()
     {
         var addCommand = new Command("add", "Add a new Expense");
-        
+
         // Agregar las mismas instancias
         addCommand.Options.Add(_descriptionOption);
         addCommand.Options.Add(_amountOption);
@@ -53,7 +53,7 @@ public class AddCommand(ExpenseService expenseService)
 
             return 0;
         });
-        
+
         return addCommand;
     }
 }

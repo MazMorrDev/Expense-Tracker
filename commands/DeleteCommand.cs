@@ -7,7 +7,7 @@ public class DeleteCommand(ExpenseService expenseService)
 {
     private readonly ExpenseService _expenseService = expenseService;
 
-    private readonly Option<int> _idOption = new("--id")
+    private readonly Option<int> _idOption = new("--id", "-i")
     {
         Required = true,
         Description = "Expense ID"

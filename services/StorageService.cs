@@ -47,4 +47,9 @@ public class StorageService
         string json = JsonSerializer.Serialize(expenses, new JsonSerializerOptions { WriteIndented = true });
         File.WriteAllText(_dataFilePath, json);
     }
+
+    public void SaveAsCSV(List<Expense>? expenses, )
+    {
+        string csv = Csv
+    }
 }
