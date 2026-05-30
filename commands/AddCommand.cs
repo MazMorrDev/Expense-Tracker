@@ -7,7 +7,6 @@ public class AddCommand(ExpenseService expenseService)
 {
     private readonly ExpenseService _expenseService = expenseService;
 
-    // Definir las opciones una sola vez (como campos)
     private readonly Option<string> _descriptionOption = new("--description", "-d")
     {
         Required = true,
