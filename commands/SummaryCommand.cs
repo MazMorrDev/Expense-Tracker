@@ -9,10 +9,8 @@ public class SummaryCommand(ExpenseService expenseService)
 
     private readonly Option<int> _monthOption = new("--month")
     {
-        Required = true,       // El usuario debe proporcionar este flag
         Description = "Number of the month of the current year"
     };
-
 
     public Command GetSummaryCommand()
     {
@@ -23,18 +21,25 @@ public class SummaryCommand(ExpenseService expenseService)
             parseResult =>
             {
                 int month = parseResult.GetValue(_monthOption);
-                if (month > 12 || month < 1)
+                if (month != 0)
                 {
-                    Console.WriteLine("Month flag must be between 1 - 12");
-                    return 1;
+                    if (month > 12 || month < 1)
+                    {
+                        Console.WriteLine("Month flag must be between 1 - 12");
+                        return 1;
+                    }
                 }
-                Console.WriteLine("📋 Expense list:");
+
+                Console.WriteLine("📋 Expense summary:");
                 List<Expense> expenses = _expenseService.GetAllExpenses();
-                expenses.Where(expense => expense.Date.Month == month);
-                foreach (var item in expenses)
+                decimal totalExpense = 0;
+
+                foreach (var item in expenses.Where(expense => expense.Date.Month == month))
                 {
-                    Console.WriteLine($"{item.Amount} | {item.Category} | {item.Date}");
+                    Console.WriteLine($"${item.Amount} | {item.Category} | {item.Date}");
+                    totalExpense += item.Amount;
                 }
+                Console.WriteLine($"Total Expense: ${totalExpense}");
                 return 0;
             }
         );
