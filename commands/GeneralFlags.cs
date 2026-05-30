@@ -8,10 +8,7 @@ public static class GeneralFlags
     {
         // 1. Definir las opciones (flags) que aceptará nuestro comando 'add'
         //    Cada Option<T> representa un flag con su tipo, descripción y reglas.
-        var descriptionOption = new Option<string>(
-            "--description",      // Nombre largo del flag
-            "Transaction description" // Descripción que aparece en la ayuda
-        )
+        var descriptionOption = new Option<string>("--description", "Transaction description")
         {
             Required = true       // El usuario debe proporcionar este flag
         };
