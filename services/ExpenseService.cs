@@ -38,4 +38,15 @@ public class ExpenseService
         // then the IDs will be duplicated in the save operation
         return expenses.Count + 1;
     }
+
+    public void Delete(List<Expense> expenses, int id)
+    {
+        Expense? expense = expenses.FirstOrDefault(expense => expense.Id == id);
+        if (expense == null)
+        {
+            Console.WriteLine("The Provided ID was not found.");
+            return;
+        }
+        expenses.Remove(expense);
+    }
 }

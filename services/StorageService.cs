@@ -25,7 +25,7 @@ public class StorageService
 
         string json = File.ReadAllText(_dataFilePath);
 
-        
+
         if (string.IsNullOrWhiteSpace(json))
             return [];
 
