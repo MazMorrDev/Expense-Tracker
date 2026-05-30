@@ -7,8 +7,10 @@ I built my own version in C# as a command‑line tool to keep track of personal 
 
 - Add expenses with a description, amount, and optional category
 - List all recorded expenses
-- (More features coming soon – like summaries, filters, or exporting)
--
+- Watch summaries with month filters
+- Delete existent expenses
+- Export all the expenses to csv file
+- Update existent expenses
 
 ## 📦 Requirements
 
