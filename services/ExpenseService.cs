@@ -2,14 +2,9 @@
 
 namespace ExpenseTracker;
 
-public class ExpenseService
+public class ExpenseService(StorageService storageService)
 {
-    private readonly StorageService _storageService;
-
-    public ExpenseService()
-    {
-        _storageService = new StorageService();
-    }
+    private readonly StorageService _storageService = storageService;
 
     public Expense CreateExpense(string description, string category, decimal amount)
     {
