@@ -1,11 +1,20 @@
 ﻿using System.CommandLine;
 using ExpenseTracker;
+using TaskTrackerCLI.Services;
 
-// Comando raíz: es el punto de entrada de toda la aplicación CLI.
-//    Agrupa todos los subcomandos y define la descripción global.
-var rootCommand = new RootCommand("Expense Tracker - Your expenses on your hand");
-rootCommand.Subcommands.Add(AddCommand.GetAddCommand());   // Añade "add" al root
-rootCommand.Subcommands.Add(ListCommand.GetListCommand());  // Añade "list" al root
+
+
+// Root Commands: it's the entry point of all the CLI application.
+//    Group all the subcommands and defines the global description.
+var storageService = new StorageService();
+var expenseService = new ExpenseService(storageService);
+
+var generalFlags = new GeneralFlags();
+var addCommand = new AddCommand(generalFlags);
+var listCommand = new ListCommand(expenseService);
+var rootCommand = new RootCommand("Expense Tracker - Oh My Expenses (;D Reference)");
+rootCommand.Subcommands.Add(addCommand.GetAddCommand());   // Add the "add" command to the root
+rootCommand.Subcommands.Add(listCommand.GetListCommand());
 
 // Parsear los argumentos reales (los que vienen de la terminal) y ejecutar el comando correspondiente.
 //    - Parse: Analiza la cadena de argumentos según las reglas definidas.

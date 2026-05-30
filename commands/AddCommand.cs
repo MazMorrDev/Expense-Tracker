@@ -2,16 +2,18 @@
 
 namespace ExpenseTracker;
 
-public static class AddCommand
+public class AddCommand(GeneralFlags generalFlags, ExpenseService expenseService)
 {
-    public static Command GetAddCommand()
+    private readonly GeneralFlags _generalFlags = generalFlags;
+    private readonly ExpenseService _expenseService = expenseService;
+    public Command GetAddCommand()
     {
         // Crear el comando 'add' y asociarle las opciones definidas
         //    Un Command representa una acción que el usuario puede ejecutar (ej: "expense-tracker add ...")
         var addCommand = new Command("add", "Add a new Expense");
-        addCommand.Options.Add(GeneralFlags.GetDescriptionFlag());
-        addCommand.Options.Add(GeneralFlags.GetAmountFlag());
-        addCommand.Options.Add(GeneralFlags.GetDescriptionFlag());
+        addCommand.Options.Add(_generalFlags.GetDescriptionFlag());
+        addCommand.Options.Add(_generalFlags.GetAmountFlag());
+        addCommand.Options.Add(_generalFlags.GetDescriptionFlag());
 
         // Definir la lógica que se ejecutará cuando el usuario escriba el comando 'add'
         //    SetAction recibe un delegado que toma un ParseResult (resultado del análisis de la línea de comandos)
@@ -20,10 +22,12 @@ public static class AddCommand
         {
             // GetValue<T> extrae el valor del flag tipado. Como Required=true aseguramos que no sean null.
             // El operador '!' (null-forgiving) le dice al compilador que confiamos en que no será nulo.
-            string description = parseResult.GetValue(GeneralFlags.GetDescriptionFlag())!;
-            decimal amount = parseResult.GetValue(GeneralFlags.GetAmountFlag());
+            string description = parseResult.GetValue(_generalFlags.GetDescriptionFlag())!;
+            decimal amount = parseResult.GetValue(_generalFlags.GetAmountFlag());
             // Para category, DefaultValueFactory garantiza que siempre tenga un valor (nunca null)
-            string category = parseResult.GetValue(GeneralFlags.GetDescriptionFlag())!;
+            string category = parseResult.GetValue(_generalFlags.GetDescriptionFlag())!;
+
+            _expenseService.CreateExpense(description, category, amount);
 
             Console.WriteLine($"✅ Added Expense:");
             Console.WriteLine($"   Description: {description}");
