@@ -16,6 +16,7 @@ I built my own version in C# as a command‑line tool to keep track of personal 
 ## 🛠️ Installation & Usage (the same as before)
 
 1. Clone the repository:
+
    ```bash
    git clone https://github.com/MazMorrDev/Expense-Tracker.git
    cd Expense-Tracker

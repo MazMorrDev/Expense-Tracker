@@ -14,8 +14,8 @@ var rootCommand = new RootCommand("Expense Tracker - Oh My Expenses (;D Referenc
 rootCommand.Subcommands.Add(addCommand.GetAddCommand());   // Add the "add" command to the root
 rootCommand.Subcommands.Add(listCommand.GetListCommand());
 
-// Parsear los argumentos reales (los que vienen de la terminal) y ejecutar el comando correspondiente.
-//    - Parse: Analiza la cadena de argumentos según las reglas definidas.
-//    - Invoke: Ejecuta la acción del comando que coincidió y devuelve el código de salida.
+// Parse los argumentos reales (los que vienen de la terminal) y ejecutar el comando correspondiente.
+//    - Parse: Analize the string of arguments by the defined rules.
+//    - Invoke: Execute the action of the command that matched and returns the exit code.
 ParseResult parseResult = rootCommand.Parse(args);
 return parseResult.Invoke();
