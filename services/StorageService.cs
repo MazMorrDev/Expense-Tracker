@@ -36,7 +36,7 @@ public class StorageService
         {
 
             Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("El archivo data.json está dañado o no tiene formato válido. Se reiniciará. ദ്ദി(ᗜˬᗜ)");
+            Console.WriteLine("The file data.json it's damaged or doesn't have a valid format.");
             Console.ResetColor();
             return [];
         }
