@@ -1,23 +1,32 @@
 ﻿using System.CommandLine;
-using ExpenseTracker.commands;
 using ExpenseTracker.services;
 
 namespace ExpenseTracker;
 
-public class DeleteCommand(GeneralFlags generalFlags, ExpenseService expenseService)
+public class DeleteCommand(ExpenseService expenseService)
 {
-    private readonly GeneralFlags _generalFlags = generalFlags;
     private readonly ExpenseService _expenseService = expenseService;
+
+    public Option<int> GetIdFlag()
+    {
+        // 1. Definir las opciones (flags) que aceptará nuestro comando 'add'
+        //    Cada Option<T> representa un flag con su tipo, descripción y reglas.
+        var descriptionOption = new Option<int>("--id", "Expense ID")
+        {
+            Required = true       // El usuario debe proporcionar este flag
+        };
+        return descriptionOption;
+    }
 
     public Command GetDeleteCommand()
     {
         var deleteCommand = new Command("delete", "Delete an existent Expense");
-        deleteCommand.Options.Add(_generalFlags.GetIdFlag());
+        deleteCommand.Options.Add(GetIdFlag());
 
         deleteCommand.SetAction(
             parseResult =>
             {
-                int id = parseResult.GetValue(_generalFlags.GetIdFlag());
+                int id = parseResult.GetValue(GetIdFlag());
                 _expenseService.DeleteExpense(id);
                 return 0;
             }
