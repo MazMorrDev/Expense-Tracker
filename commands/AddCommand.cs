@@ -8,7 +8,7 @@ public static class AddCommand
     {
         // Crear el comando 'add' y asociarle las opciones definidas
         //    Un Command representa una acción que el usuario puede ejecutar (ej: "expense-tracker add ...")
-        var addCommand = new Command("add", "Add a new transaction");
+        var addCommand = new Command("add", "Add a new Expense");
         addCommand.Options.Add(GeneralFlags.GetDescriptionFlag());
         addCommand.Options.Add(GeneralFlags.GetAmountFlag());
         addCommand.Options.Add(GeneralFlags.GetDescriptionFlag());
@@ -25,7 +25,7 @@ public static class AddCommand
             // Para category, DefaultValueFactory garantiza que siempre tenga un valor (nunca null)
             string category = parseResult.GetValue(GeneralFlags.GetDescriptionFlag())!;
 
-            Console.WriteLine($"✅ Added Transaction:");
+            Console.WriteLine($"✅ Added Expense:");
             Console.WriteLine($"   Description: {description}");
             Console.WriteLine($"   Amount: ${amount}");
             Console.WriteLine($"   Category: {category}");
