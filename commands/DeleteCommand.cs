@@ -11,11 +11,12 @@ public class DeleteCommand(ExpenseService expenseService)
     {
         // 1. Definir las opciones (flags) que aceptará nuestro comando 'add'
         //    Cada Option<T> representa un flag con su tipo, descripción y reglas.
-        var descriptionOption = new Option<int>("--id", "Expense ID")
+        var idOption = new Option<int>("--id")
         {
-            Required = true       // El usuario debe proporcionar este flag
+            Required = true,       // El usuario debe proporcionar este flag
+            Description = "Expense ID"
         };
-        return descriptionOption;
+        return idOption;
     }
 
     public Command GetDeleteCommand()

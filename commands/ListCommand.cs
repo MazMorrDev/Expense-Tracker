@@ -11,10 +11,10 @@ public class ListCommand(ExpenseService expenseService)
         var listCommand = new Command("list", "List all transactions");
         listCommand.SetAction(parseResult =>
         {
-            Console.WriteLine("📋 Transaction list:");
+            Console.WriteLine("📋 Expense list:");
             foreach (var item in _expenseService.GetAllExpenses())
             {
-                Console.WriteLine(item.Id + " | " + item.Description + " | " + item.Amount + " | " + item.Category);
+                Console.WriteLine($"{item.Id} | {item.Description} | {item.Amount} | {item.Category} | {item.Date}");
             }
             return 0;
         });

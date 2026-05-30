@@ -11,18 +11,20 @@ public class AddCommand(ExpenseService expenseService)
     {
         // 1. Definir las opciones (flags) que aceptará nuestro comando 'add'
         //    Cada Option<T> representa un flag con su tipo, descripción y reglas.
-        var descriptionOption = new Option<string>("--description", "Expense description")
+        var descriptionOption = new Option<string>("--description")
         {
-            Required = true       // El usuario debe proporcionar este flag
+            Required = true,       // El usuario debe proporcionar este flag
+            Description = "Expense description"
         };
         return descriptionOption;
     }
 
     public Option<decimal> GetAmountFlag()
     {
-        var amountOption = new Option<decimal>("--amount", "Expense amount")
+        var amountOption = new Option<decimal>("--amount")
         {
-            Required = true
+            Required = true,
+            Description = "Expense amount"
         };
         return amountOption;
     }
@@ -30,9 +32,10 @@ public class AddCommand(ExpenseService expenseService)
     public Option<string> GetCategoryFlag()
     {
         // Para valor por defecto, usamos DefaultValueFactory (función que se ejecuta si el flag no se proporciona)
-        var categoryOption = new Option<string>("--category", "Expense category")
+        var categoryOption = new Option<string>("--category")
         {
-            DefaultValueFactory = _ => "General"  // Si no se usa --category, su valor será "General"
+            DefaultValueFactory = _ => "General",  // Si no se usa --category, su valor será "General"
+            Description = "Expense category"
         };
         return categoryOption;
     }
@@ -44,7 +47,7 @@ public class AddCommand(ExpenseService expenseService)
         var addCommand = new Command("add", "Add a new Expense");
         addCommand.Options.Add(GetDescriptionFlag());
         addCommand.Options.Add(GetAmountFlag());
-        addCommand.Options.Add(GetDescriptionFlag());
+        addCommand.Options.Add(GetCategoryFlag());
 
         // Definir la lógica que se ejecutará cuando el usuario escriba el comando 'add'
         //    SetAction recibe un delegado que toma un ParseResult (resultado del análisis de la línea de comandos)
@@ -56,14 +59,15 @@ public class AddCommand(ExpenseService expenseService)
             string description = parseResult.GetValue(GetDescriptionFlag())!;
             decimal amount = parseResult.GetValue(GetAmountFlag());
             // Para category, DefaultValueFactory garantiza que siempre tenga un valor (nunca null)
-            string category = parseResult.GetValue(GetDescriptionFlag())!;
+            string category = parseResult.GetValue(GetCategoryFlag())!;
 
-            _expenseService.CreateExpense(description, category, amount);
+            Expense expense = _expenseService.CreateExpense(description, category, amount);
 
             Console.WriteLine($"✅ Added Expense:");
-            Console.WriteLine($"   Description: {description}");
-            Console.WriteLine($"   Amount: ${amount}");
-            Console.WriteLine($"   Category: {category}");
+            Console.WriteLine($"   Description: {expense.Description}");
+            Console.WriteLine($"   Amount: ${expense.Amount}");
+            Console.WriteLine($"   Category: {expense.Category}");
+            Console.WriteLine($"   Date: {expense.Date}");
 
             return 0; // 0 indica éxito
         });

@@ -9,7 +9,7 @@ public class StorageService
     public StorageService()
     {
         var projectRoot = Path.GetFullPath(Path.Combine(AppContext.BaseDirectory, "..", "..", ".."));
-        var dataDir = Path.Combine(projectRoot, "Data");
+        var dataDir = Path.Combine(projectRoot, "data");
 
         if (!Directory.Exists(dataDir))
             Directory.CreateDirectory(dataDir);

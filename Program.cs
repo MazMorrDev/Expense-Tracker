@@ -1,4 +1,5 @@
 ﻿using System.CommandLine;
+using ExpenseTracker;
 using ExpenseTracker.commands;
 using ExpenseTracker.services;
 
@@ -7,12 +8,15 @@ using ExpenseTracker.services;
 var storageService = new StorageService();
 var expenseService = new ExpenseService(storageService);
 
-var generalFlags = new GeneralFlags();
-var addCommand = new AddCommand(generalFlags, expenseService);
+var addCommand = new AddCommand(expenseService);
 var listCommand = new ListCommand(expenseService);
+var deleteCommand = new DeleteCommand(expenseService);
+var summaryCommand = new SummaryCommand(expenseService);
 var rootCommand = new RootCommand("Expense Tracker - Oh My Expenses (;D Reference)");
 rootCommand.Subcommands.Add(addCommand.GetAddCommand());   // Add the "add" command to the root
 rootCommand.Subcommands.Add(listCommand.GetListCommand());
+rootCommand.Subcommands.Add(deleteCommand.GetDeleteCommand());
+rootCommand.Subcommands.Add(summaryCommand.GetSummaryCommand());
 
 // Parse the real arguments (the ones that comes from the terminal) and execute the respective command.
 //    - Parse: Analize the string of arguments by the defined rules.
