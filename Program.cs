@@ -1,8 +1,6 @@
 ﻿using System.CommandLine;
-using ExpenseTracker;
-using TaskTrackerCLI.Services;
-
-
+using ExpenseTracker.commands;
+using ExpenseTracker.services;
 
 // Root Commands: it's the entry point of all the CLI application.
 //    Group all the subcommands and defines the global description.

@@ -1,6 +1,6 @@
 ﻿using System.CommandLine;
 
-namespace ExpenseTracker;
+namespace ExpenseTracker.commands;
 
 public class GeneralFlags
 {

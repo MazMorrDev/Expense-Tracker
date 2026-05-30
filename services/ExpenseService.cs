@@ -1,6 +1,4 @@
-﻿using TaskTrackerCLI.Services;
-
-namespace ExpenseTracker;
+﻿namespace ExpenseTracker.services;
 
 public class ExpenseService(StorageService storageService)
 {

@@ -1,7 +1,6 @@
 ﻿using System.Text.Json;
-using ExpenseTracker;
 
-namespace TaskTrackerCLI.Services;
+namespace ExpenseTracker.services;
 
 public class StorageService
 {

@@ -1,6 +1,7 @@
 ﻿using System.CommandLine;
+using ExpenseTracker.services;
 
-namespace ExpenseTracker;
+namespace ExpenseTracker.commands;
 
 public class AddCommand(GeneralFlags generalFlags, ExpenseService expenseService)
 {
