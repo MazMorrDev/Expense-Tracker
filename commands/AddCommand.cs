@@ -43,12 +43,7 @@ public class AddCommand(ExpenseService expenseService)
 
             Expense expense = _expenseService.CreateExpense(description, category, amount);
 
-            Console.WriteLine($"✅ Added Expense:");
-            Console.WriteLine($"   ID: {expense.Id}");
-            Console.WriteLine($"   Description: {expense.Description}");
-            Console.WriteLine($"   Amount: ${expense.Amount}");
-            Console.WriteLine($"   Category: {expense.Category}");
-            Console.WriteLine($"   Date: {expense.Date}");
+            Console.WriteLine($"Expense added successfully ID: {expense.Id}");
 
             return 0;
         });

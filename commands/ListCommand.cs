@@ -23,10 +23,10 @@ public class ListCommand(ExpenseService expenseService)
         {
             var category = parseResult.GetValue(_categoryOption);
 
-            Console.WriteLine("📋 Expense list:");
+            Console.WriteLine("📋 Expense list: \nID | Date | Description | Amount | Category");
             foreach (var item in _expenseService.GetAllExpenses().Where(expense => expense.Category == category))
             {
-                Console.WriteLine($"{item.Id} | {item.Description} | {item.Amount} | {item.Category} | {item.Date}");
+                Console.WriteLine($"{item.Id} | {item.Date} | {item.Description} | {item.Amount} | {item.Category}  ");
             }
             return 0;
         });

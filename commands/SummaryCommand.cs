@@ -36,7 +36,6 @@ public class SummaryCommand(ExpenseService expenseService)
 
                 foreach (var item in expenses.Where(expense => expense.Date.Month == month))
                 {
-                    Console.WriteLine($"${item.Amount} | {item.Category} | {item.Date}");
                     totalExpense += item.Amount;
                 }
                 Console.WriteLine($"Total Expense: ${totalExpense}");

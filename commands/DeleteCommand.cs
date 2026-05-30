@@ -24,6 +24,7 @@ public class DeleteCommand(ExpenseService expenseService)
             {
                 int id = parseResult.GetValue(_idOption);
                 _expenseService.DeleteExpense(id);
+                Console.WriteLine("Expense deleted successfully");
                 return 0;
             }
         );
