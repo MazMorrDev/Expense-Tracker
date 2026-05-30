@@ -4,6 +4,17 @@ namespace ExpenseTracker.commands;
 
 public class GeneralFlags
 {
+    public Option<int> GetIdFlag()
+    {
+        // 1. Definir las opciones (flags) que aceptará nuestro comando 'add'
+        //    Cada Option<T> representa un flag con su tipo, descripción y reglas.
+        var descriptionOption = new Option<int>("--id", "Expense ID")
+        {
+            Required = true       // El usuario debe proporcionar este flag
+        };
+        return descriptionOption;
+    }
+
     public Option<string> GetDescriptionFlag()
     {
         // 1. Definir las opciones (flags) que aceptará nuestro comando 'add'
