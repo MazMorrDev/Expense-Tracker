@@ -3,9 +3,10 @@ using ExpenseTracker.services;
 
 namespace ExpenseTracker;
 
-public class ExportCommand(StorageService storageService)
+public class ExportCommand(StorageService storageService, ExpenseService expenseService)
 {
     private readonly StorageService _storageService = storageService;
+    private readonly ExpenseService _expenseService = expenseService;
 
     private readonly Option<string> _outputOption = new("--output", "-o")
     {
@@ -30,7 +31,9 @@ public class ExportCommand(StorageService storageService)
         exportCommand.SetAction(parseResult =>
         {
             string output = parseResult.GetValue(_outputOption)!;
-            _storageService.SaveAsCSV();
+            string fileName = parseResult.GetValue(_nameOption)!;
+
+            _storageService.SaveAsCSV(_expenseService.GetAllExpenses(), fileName, output);
             Console.WriteLine($"File exported in: {output}");
         });
 

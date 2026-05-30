@@ -1,4 +1,8 @@
-﻿using System.Text.Json;
+﻿using System.Globalization;
+using System.Text;
+using System.Text.Json;
+using CsvHelper;
+using CsvHelper.Configuration;
 
 namespace ExpenseTracker.services;
 
@@ -48,8 +52,34 @@ public class StorageService
         File.WriteAllText(_dataFilePath, json);
     }
 
-    public void SaveAsCSV(List<Expense>? expenses, )
+    public void SaveAsCSV(List<Expense> expenses, string fileName, string outputPath)
     {
-        string csv = Csv
+        string fullPath;
+
+        if (Directory.Exists(outputPath) || outputPath.EndsWith(Path.DirectorySeparatorChar.ToString()))
+        {
+            fullPath = Path.Combine(outputPath, $"{fileName}.csv");
+        }
+        else
+        {
+            // if the user puts a route like "/home/user/my-expenses.csv"
+            fullPath = outputPath;
+        }
+
+        string? directory = Path.GetDirectoryName(fullPath);
+        if (!string.IsNullOrEmpty(directory))
+            Directory.CreateDirectory(directory);
+
+        var config = new CsvConfiguration(CultureInfo.InvariantCulture)
+        {
+            HasHeaderRecord = true,
+            Encoding = Encoding.UTF8
+        };
+
+        using var writer = new StreamWriter(fullPath);
+        using var csv = new CsvWriter(writer, config);
+        csv.WriteRecords(expenses);
+
+        Console.WriteLine($"✅ CSV saved to: {fullPath}");
     }
 }
