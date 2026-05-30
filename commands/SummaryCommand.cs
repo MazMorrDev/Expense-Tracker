@@ -7,27 +7,22 @@ public class SummaryCommand(ExpenseService expenseService)
 {
     private readonly ExpenseService _expenseService = expenseService;
 
-    public Option<int> GetMonthFlag()
+    private readonly Option<int> _monthOption = new("--month")
     {
-        // 1. Definir las opciones (flags) que aceptará nuestro comando 'add'
-        //    Cada Option<T> representa un flag con su tipo, descripción y reglas.
-        var monthOption = new Option<int>("--month")
-        {
-            Required = true,       // El usuario debe proporcionar este flag
-            Description = "Number of the month of the current year"
-        };
-        return monthOption;
-    }
+        Required = true,       // El usuario debe proporcionar este flag
+        Description = "Number of the month of the current year"
+    };
+
 
     public Command GetSummaryCommand()
     {
         var summaryCommand = new Command("summary", "Shows a summary of all expenses");
-        summaryCommand.Options.Add(GetMonthFlag());
+        summaryCommand.Options.Add(_monthOption);
 
         summaryCommand.SetAction(
             parseResult =>
             {
-                int month = parseResult.GetValue(GetMonthFlag());
+                int month = parseResult.GetValue(_monthOption);
                 if (month > 12 || month < 1)
                 {
                     Console.WriteLine("Month flag must be between 1 - 12");
