@@ -4,7 +4,7 @@ public class ExpenseService(StorageService storageService)
 {
     private readonly StorageService _storageService = storageService;
 
-    public Expense CreateExpense(string description, string? category, decimal amount)
+    public Expense CreateExpense(string description, string category, decimal amount)
     {
         Expense expense = new()
         {
